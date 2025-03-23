@@ -1,4 +1,6 @@
 import random
+import sys #para poder usar el exit
+
 # Preguntas para el juego
 questions = [
 "¿Qué función se usa para obtener la longitud de una cadena en Python?",
@@ -34,12 +36,23 @@ for _ in range(3):
         print(f"{i + 1}. {answer}")
  
 # El usuario tiene 2 intentos para responder correctamente
-    for intento in range(2):
-        user_answer = int(input("Respuesta: ")) - 1
-        # Se verifica si la respuesta es correcta
-        if user_answer ==  correct_answers_index[question_index]:
-            print("¡Correcto!")
-            break #es la sentencia para salir del bucle en caso de condicion correcta
+    for intento in range(2):    
+        user_imput = input("Respuesta: ")
+        #armo una lista que por cada caracter en la respuesta gaurde true si es un digito false si no lo es
+        contiene_numero=[caracter.isdigit() for caracter in user_imput]
+        if not any (contiene_numero): #devuelve true si al menos uno de los elementos de la lista es true
+            print ('Respuesta no valida')
+            sys.exit(1)
+        else:
+            user_answer= int(user_imput)-1
+            # Se verifica si la respuesta es correcta
+            if user_answer<0 or user_answer>= len(answers[question_index]): 
+            #si lo que ingresa es menor a 0 o mayor o igual a 3 da error 
+                print ('Respuesta no valida')
+                sys.exit (1) #termina el programa
+            elif user_answer ==  correct_answers_index[question_index]:
+                print("¡Correcto!")
+                break #es la sentencia para salir del bucle en caso de condicion correcta
     else:
         # Si el usuario no responde correctamente después de 2 intentos,
         # se muestra la respuesta correcta
