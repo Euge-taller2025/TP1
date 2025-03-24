@@ -30,11 +30,10 @@ puntaje=0
 
 #combino las tres listas en una lista de tuplas, para cada pregunta, tengo las respuestas y el indice de la corrrecta
 #zip es la tupla que luego se convierte en una lista para poder acceder con el random
-questions_to_ask = random.choices(list(zip(questions,answers, correct_answers_index)), k=3)
+questions_to_ask = random.sample(list(zip(questions,answers, correct_answers_index)), k=3)
 
 # El usuario deberá contestar 3 preguntas
 for question, possible_answer, correct_answer_index in questions_to_ask:
- 
     # Se muestra la pregunta y las respuestas posibles
     print(question)
     for i, answer in enumerate(possible_answer):
